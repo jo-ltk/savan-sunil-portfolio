@@ -1,6 +1,7 @@
 import { BEHIND, ROLE, pad } from "@/data/site";
 import { BackToTop, GoLink } from "@/components/links";
 import Year from "@/components/Year";
+import Image from "next/image";
 
 /** 05 — Design process: pinned horizontal timeline on wide screens, a stacked list elsewhere. */
 export function Process() {
@@ -89,6 +90,14 @@ export function About() {
 
 /** 08 — Resume & credentials. */
 export function Resume() {
+  const skillGroups = [
+    { name: "Architecture Design", skills: ["SketchUp", "Rhino", "Grasshopper"] },
+    { name: "BIM | Technical", skills: ["AutoCAD", "Revit", "Navisworks"] },
+    { name: "Visualization", skills: ["D5 Render", "Lumion", "Twinmotion", "V-Ray", "Enscape"] },
+    { name: "Graphics", skills: ["Photoshop", "InDesign", "Canva", "Sketching"] },
+    { name: "AI", skills: ["ChatGPT", "Google AI Studio", "ComfyUI", "Claude", "Nano Banana"] },
+  ];
+
   return (
     <section className="room resume" id="resume" data-tone="light" aria-labelledby="resH">
       <div className="head">
@@ -97,17 +106,54 @@ export function Resume() {
         <GoLink className="cta" to="contact">Request full CV</GoLink>
       </div>
       <div className="cv">
-        <section className="rv"><h3>Education</h3><ol className="tl"><li><span className="when tbd">Year</span><div><strong className="tbd">Degree</strong><span>Institution, city</span></div></li></ol></section>
-        <section className="rv"><h3>Professional Experience</h3><ol className="tl"><li><span className="when tbd">Years</span><div><strong className="tbd">Role</strong><span>Practice, city</span></div></li></ol></section>
-        <section className="rv"><h3>Software</h3><ul className="chips"><li>Revit</li><li className="tbd">Add software</li></ul></section>
-        <section className="rv">
-          <h3>Technical Capabilities</h3>
-          <ul className="chips">
-            <li>Parametric Architecture</li><li>BIM modelling</li><li>Technical documentation</li>
-            <li>Coordinated drawings</li><li>Architectural Design</li><li>Computational Design</li>
-          </ul>
+        <section className="cv-overview rv" aria-label="Profile">
+          <div className="cv-portrait">
+            <Image src="/images/savan-sunil.png" alt="Savan Sunil" fill sizes="(max-width: 760px) 240px, (max-width: 1100px) 30vw, 280px" />
+          </div>
+          <div className="cv-overview-copy">
+            <div className="cv-identity">
+              <span className="eyebrow">Architect</span>
+              <h3 className="cv-name">Savan Sunil</h3>
+            </div>
+            <dl className="cv-details">
+              <div><dt>Date of birth</dt><dd>27 | 05 | 2000</dd></div>
+              <div><dt>Location</dt><dd>Dubai, United Arab Emirates</dd></div>
+              <div><dt>Email</dt><dd><a href="mailto:ar.savan.works@gmail.com">ar.savan.works@gmail.com</a></dd></div>
+              <div><dt>Phone</dt><dd><a href="tel:+971565609242">+971-565609242</a></dd></div>
+            </dl>
+            <div className="cv-profile">
+              <span className="eyebrow">Profile</span>
+              <p>Hi, I&apos;m Savan, an Architect. With 3 years of professional experience, passionate about conceptual development, hand sketching, and exploring the relationship between architecture, people, and place. I enjoy transforming initial ideas into meaningful spaces through creative thinking, design development, and architectural visualization.</p>
+              <p>With skills in Revit, AutoCAD, Rhino, SketchUp, Adobe Creative Suite, Lumion, V-Ray, D5 Render, and AI-driven architectural workflows, I strive to combine design sensitivity, technical understanding, and computational exploration to create thoughtful, purposeful architecture.</p>
+            </div>
+          </div>
         </section>
-        <section className="rv"><h3>Certifications</h3><ol className="tl"><li><span className="when tbd">Year</span><div><strong className="tbd">Certification</strong><span>Issuer</span></div></li></ol></section>
+        <section className="cv-education rv">
+          <h3>Education</h3>
+          <ol className="tl">
+            <li><span className="when">2018 – 2023</span><div><strong>Bachelor of Architecture</strong><span>Mahatma Gandhi University, Kerala, India</span></div></li>
+          </ol>
+        </section>
+        <section className="cv-experience rv">
+          <h3>Professional Experience</h3>
+          <ol className="tl">
+            <li><span className="when">2024 – 2026</span><div><strong>Xbd Collective</strong><span>Architect · Dubai | India | Egypt</span></div></li>
+            <li><span className="when">2026</span><div><strong>Bloc Forms</strong><span>3D Visualizer (Freelancer) · Kottayam, India</span></div></li>
+            <li><span className="when">2023 – 2024</span><div><strong>Hitanshu Jishtu Architects</strong><span>Jr. Architect · Himachal Pradesh, India</span></div></li>
+            <li><span className="when">2022 – 2023</span><div><strong>Prashant Pradhan Architects</strong><span>Intern Architect · Sikkim, India</span></div></li>
+          </ol>
+        </section>
+        <section className="cv-skills rv">
+          <h3>Skills</h3>
+          <div className="cv-skills-grid">
+            {skillGroups.map((group) => (
+              <div className="cv-skill-group" key={group.name}>
+                <h4>{group.name}</h4>
+                <ul className="chips">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </section>
   );
