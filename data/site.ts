@@ -6,6 +6,8 @@
  */
 
 export const IMG = {
+  heroSky: "/images/cinematic-golden-sunset-sky.png",
+  heroVilla: "/images/modern-luxury-villa.png",
   cabin: "/images/cabin.jpg",
   cabinCut: "/images/cabin-cutout.png",
   villa: "/images/villa.jpg",

@@ -6,15 +6,15 @@ import { Chevron } from "@/components/ui";
 export default function Hero() {
   return (
     <section className="room hero" id="top" data-tone="light" aria-labelledby="heroH">
-      <div className="hero-layer" id="heroBg">
-        <img src={IMG.cabin} alt="" fetchPriority="high" />
+      <div className="hero-sky" id="heroSky">
+        <img src={IMG.heroSky} alt="" fetchPriority="high" />
+      </div>
+      <div className="hero-layer hero-bg" id="heroBg">
+        <img src={IMG.heroVilla} alt="" fetchPriority="high" />
       </div>
       <p className="hero-name" id="heroName" aria-hidden="true">
         <span className="line"><span>Savan Sunil</span></span>
       </p>
-      <div className="hero-layer hero-fg" id="heroFg">
-        <img src={IMG.cabinCut} alt="Dark timber cabin on a rocky hillside" />
-      </div>
       <div className="hero-fade" aria-hidden="true" />
       <div className="hero-meta h-in">
         <span className="eyebrow">Architect — Parametric · BIM · Design</span>
@@ -38,7 +38,6 @@ export default function Hero() {
           </div>
         </aside>
       </div>
-      <span className="credit">Temporary reference image</span>
     </section>
   );
 }

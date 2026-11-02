@@ -33,17 +33,15 @@ export default function LandingMotion() {
         body.classList.add("tone-js");
         if (!c.wide) body.classList.add("no-pin");
 
-        /* 01 hero: layered entrance, then three depths on scroll (sky, name, building) */
+        /* 01 hero: image and name entrance, then subtle depth on scroll */
         gsap.timeline({ defaults: { ease: "expo.out" } })
           .from("#heroBg", { scale: 1.12, duration: 2.4 }, 0)
-          .from("#heroFg", { yPercent: 14, scale: 1.06, duration: 2.2 }, 0)
           .from("#heroName .line > span", { yPercent: 110, duration: 1.4 }, 0.3)
           .from("#heroH .line > span", { yPercent: 110, duration: 1.2, stagger: 0.08 }, 0.6)
           .from(".h-in, #nav > *", { opacity: 0, y: 16, duration: 0.9, stagger: 0.05, clearProps: "opacity,transform" }, 0.8);
         gsap.timeline({ defaults: { ease: "none" }, scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: true } })
           .to("#heroBg", { yPercent: 8 }, 0)
           .to("#heroName", { yPercent: 70, opacity: 0.2 }, 0)
-          .to("#heroFg", { yPercent: -6, scale: 1.04 }, 0)
           .to(".hero-bottom", { yPercent: -40, opacity: 0 }, 0);
 
         /* 02 projects: each scene slides up over the last. While it arrives, panel, picture and type travel
@@ -122,14 +120,13 @@ export default function LandingMotion() {
         gsap.fromTo("#cH", { xPercent: 4 }, { xPercent: -6, ease: "none", scrollTrigger: { trigger: "#contact", start: "top bottom", end: "bottom top", scrub: true } });
         gsap.from(".foot > *", { y: 40, opacity: 0, stagger: 0.1, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".foot", start: "top 95%", toggleActions: "play none none reverse" } });
 
-        /* pointer: hero depth, building follows the mouse */
+        /* pointer: hero image and name follow the mouse */
         if (c.fine) {
-          const fgx = gsap.quickTo("#heroFg img", "x", { duration: 1.4, ease: "power3" });
           const bgx = gsap.quickTo("#heroBg img", "x", { duration: 1.6, ease: "power3" });
           const nmx = gsap.quickTo("#heroName", "x", { duration: 1.5, ease: "power3" });
           const onMove = (e: MouseEvent) => {
             const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5;
-            fgx(-nx * 28); bgx(-nx * 10); nmx(nx * 18);
+            bgx(-nx * 10); nmx(nx * 18);
             const t = e.target as Element | null;
             const sc = t && t.closest ? t.closest(".scene") : null;
             if (sc) {
