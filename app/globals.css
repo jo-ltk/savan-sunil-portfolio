@@ -398,6 +398,9 @@ a { color: inherit; }
 .stat dd { margin: 0; font-size: clamp(48px, 5vw, 88px); line-height: .9; font-weight: 600; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
 .stat dt { font-size: 11px; line-height: 16px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-muted); }
 @media (max-width: 760px) {
+  /* behind → about: the two section paddings stacked left a ~160px gap on phones */
+  .behind { padding-bottom: 32px; }
+  .about { padding-top: 32px; }
   .ab-grid { grid-template-columns: 1fr; row-gap: var(--space-6); }
   .ab-portrait { max-width: 420px; }
   .stats { gap: var(--space-3); }
