@@ -1,17 +1,64 @@
 /*
  * Site content.
- * Everything known is filled in. Missing facts render as "+ Add …" placeholders, never as invented facts.
- * Images in /public/images are TEMPORARY crops of the reference screenshot — replace them with Savan's own work.
- * png: true marks a transparent cut-out that breaks out of its frame.
+ * Real architectural projects and assets of Savan Sunil.
  */
 
 export const IMG = {
   heroSky: "/images/cinematic-golden-sunset-sky.png",
   heroVilla: "/images/modern-luxury-villa.png",
-  cabin: "/images/cabin.jpg",
-  cabinCut: "/images/cabin-cutout.png",
-  villa: "/images/villa.jpg",
-  facade: "/images/facade.jpg",
+  cabin: "/images/bear-bourne-hero.jpg",
+  cabinCut: "/images/bear-bourne-cutout.png",
+  villa: "/images/lumina-hills-hero.jpg",
+  facade: "/images/awaken-hero.jpg",
+  bearBourne: {
+    hero: "/images/bear-bourne-hero.jpg",
+    cutout: "/images/bear-bourne-cutout.png",
+    night: "/images/bear-bourne-night.jpg",
+    waterfall: "/images/bear-bourne-waterfall.jpg",
+    sections: "/images/bear-bourne-sections.jpg",
+  },
+  luminaHills: {
+    hero: "/images/lumina-hills-hero.jpg",
+    aerial: "/images/lumina-hills-aerial.jpg",
+    plaza: "/images/lumina-hills-plaza.jpg",
+    concepts: "/images/lumina-hills-concepts.jpg",
+  },
+  awaken: {
+    hero: "/images/awaken-hero.jpg",
+    colonnade: "/images/awaken-colonnade.jpg",
+    axonometric: "/images/awaken-axonometric.jpg",
+    plans: "/images/awaken-plans.jpg",
+    masterplan: "/images/awaken-masterplan.jpg",
+  },
+  verdureValley: {
+    hero: "/images/verdure-valley-hero.jpg",
+    cabins: "/images/verdure-valley-cabins.jpg",
+    plans: "/images/verdure-valley-plans.jpg",
+    masterplan: "/images/verdure-valley-masterplan.jpg",
+    concepts: "/images/verdure-valley-concepts.jpg",
+  },
+  baah: {
+    hero: "/images/baah-hero.jpg",
+    interior: "/images/baah-interior.jpg",
+    axonometric: "/images/baah-axonometric.jpg",
+  },
+  enliven: {
+    hero: "/images/enliven-hero.jpg",
+    amphitheatre: "/images/enliven-amphitheatre.jpg",
+    shells: "/images/enliven-shells.jpg",
+    tensile: "/images/enliven-tensile.jpg",
+    masterplan: "/images/enliven-masterplan.jpg",
+  },
+  housing: {
+    hero: "/images/housing-hero.jpg",
+    plaza: "/images/housing-plaza.jpg",
+    units: "/images/housing-units.jpg",
+    groundplan: "/images/housing-groundplan.jpg",
+    concepts: "/images/housing-concepts.jpg",
+  },
+  sketchCover: "/images/sketch-cover.jpg",
+  ronSketches: "/images/ron-sketches.jpg",
+  portrait: "/images/savan-sunil-portrait.jpg",
 } as const;
 
 export type Tone = "light" | "dark";
@@ -33,37 +80,37 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     slug: "architecture-project-01",
-    title: "Architecture Project 01",
-    t2: "Architecture\nProject 01",
+    title: "Bear Bourne Manali",
+    t2: "Bear Bourne\nKathkuni Resort",
     cat: "Architectural Design",
     tone: "light",
-    year: "",
-    img: IMG.cabinCut,
+    year: "2023",
+    img: IMG.bearBourne.cutout,
     png: true,
-    hero: IMG.cabin,
-    alt: "Dark timber cabin on a rocky hillside",
+    hero: IMG.bearBourne.hero,
+    alt: "Bear Bourne luxury boutique resort along the Beas River, Manali",
   },
   {
     slug: "parametric-project-01",
-    title: "Parametric Project 01",
-    t2: "Parametric\nProject 01",
+    title: "Lumina Hills",
+    t2: "Lumina Hills\nIncubation Hub",
     cat: "Parametric Architecture",
     tone: "light",
-    year: "",
-    img: IMG.villa,
-    hero: IMG.villa,
-    alt: "Angular white house with a deep-set lit window",
+    year: "2024",
+    img: IMG.luminaHills.hero,
+    hero: IMG.luminaHills.hero,
+    alt: "Meghalaya Skill Incubation Hub, Shillong with sweeping parametric roof",
   },
   {
     slug: "bim-project-01",
-    title: "BIM Project 01",
-    t2: "BIM\nProject 01",
+    title: "Awaken Kerala",
+    t2: "Awaken\nCultural Hub",
     cat: "BIM & Technical Design",
     tone: "dark",
-    year: "",
-    img: IMG.facade,
-    hero: IMG.facade,
-    alt: "Textured facade with a recessed window behind trees",
+    year: "2023",
+    img: IMG.awaken.hero,
+    hero: IMG.awaken.hero,
+    alt: "Revival Centre for Lost Art Forms of Kerala with transparent studios and courtyard",
   },
 ];
 
@@ -94,153 +141,160 @@ export interface CaseStudy {
   fin: string;
 }
 
-/*
- * CASE STUDIES — one template, driven by this data.
- * SAMPLE CONTENT: realistic dummy copy and figures, marked on each page as sample content.
- * Replace with the real project information.
- */
 export const CASES: Record<string, CaseStudy> = {
-  "parametric-project-01": {
-    hero: "bleed", heroImg: IMG.villa, heroPos: "55% 55%",
-    location: "Western Ghats, India", year: "2024", type: "Private residence",
-    intro: "A hillside house whose folded roof is generated from one parametric surface, tuned to the view, the sun and the slope.",
-    overview: "The house is a single continuous plane folded over the living spaces. It rises where the valley opens up and drops low to shelter the private rooms, so the building reads as part of the ridge rather than an object placed on it.",
+  "architecture-project-01": {
+    hero: "layered", heroImg: IMG.bearBourne.hero, heroCut: IMG.bearBourne.cutout,
+    location: "Manali, Himachal Pradesh, India", year: "2023", type: "Kathkuni Village Resort",
+    intro: "A luxury boutique resort situated along the Beas River, designed to merge seamlessly with the Himalayan landscape.",
+    overview: "Bear Bourne Manali is inspired by local mountain architecture, combining stone, timber and expansive glazing to create immersive hospitality spaces with uninterrupted views of the river, forests, and surrounding Himalayan peaks.",
     items: [
-      ["Design concept", "One folded plane wraps every room, rising for views and lowering for privacy."],
-      ["Architectural vision", "A house that belongs to the ridge line, quiet from the road and open to the valley."],
-      ["Objectives", "Frame the long view, control western sun, and keep the geometry buildable with flat panels."],
-      ["Site context", "A steep, west-facing plot at the edge of a forest clearing, exposed to monsoon rain and strong afternoon light."],
+      ["Design concept", "Follow natural site contours and minimize terrain modification through terraced platforms."],
+      ["Architectural vision", "Merge local Kathkuni construction traditions with contemporary alpine hospitality."],
+      ["Objectives", "Preserve native pine vegetation, maintain natural drainage flows, and maximize southern solar exposure."],
+      ["Site context", "A forested riverside slope in Manali along the Beas River, subject to heavy snow and alpine weather."],
     ],
     gallery: [
-      ["g-full", "21/9", IMG.villa, "50% 45%", 1, "Exterior from the valley"],
-      ["g-l5", "4/5", IMG.villa, "28% 60%", 1.5, "Folded roof edge"],
-      ["g-r7 g-down", "4/3", IMG.villa, "52% 72%", 1.7, "Deep-set window"],
-      ["note", "Every opening is cut where a view cone meets the roof surface, so no window looks at nothing."],
-      ["g-r5 g-up", "3/4", IMG.villa, "88% 70%", 1.9, "Panel and glazing detail"],
+      ["g-full", "21/9", IMG.bearBourne.hero, "50% 55%", 1, "Resort lodges along the Beas River at dusk"],
+      ["note", "Inspired by local Kathkuni mountain architecture, the resort combines stone, timber and glazing to merge with the Himalayan terrain."],
+      ["g-r5", "4/5", IMG.bearBourne.waterfall, "70% 65%", 1.2, "Stone chalets fronting the river waterfall cascades"],
+      ["g-l6 g-up", "4/3", IMG.bearBourne.night, "65% 55%", 1.1, "Terraced hillside chalets with warm illuminated interiors"],
+      ["g-r6 g-down", "16/10", IMG.bearBourne.sections, "50% 20%", 1.15, "Coordinated architectural sections and elevation levels"],
     ],
-    devText: "The form was found, not drawn. View cones, sun angles and the slope drove a single surface, which was then simplified until it could be built from flat panels.",
+    devText: "The project was developed in close response to the terrain: mapping natural vegetation, rock terraces, and the river corridor before forming the building footprints.",
     dev: [
-      ["Form finding", "Roof surface generated from view cones and annual sun paths, then tested in dozens of iterations."],
-      ["Rationalisation", "Double curvature reduced to 38 flat panel types without losing the fold."],
-      ["Coordination", "The final geometry moved into BIM for structure, envelope and fabrication drawings."],
+      ["Site study", "South-oriented sloping site with dense pine forest and natural contour terraces."],
+      ["Form integration", "Tiered building platforms stepped down to the river to minimize earthwork."],
+      ["Detailing", "Kathkuni stone base, warm timber upper floors, slate roofing, and triple glazing."],
     ],
-    devImg: [IMG.villa, "70% 40%", 1.6],
+    devImg: [IMG.bearBourne.night, "20% 25%", 1.2],
     spec: [
-      ["Site area", "1,850 m²", 1], ["Built-up area", "420 m²", 1], ["Building type", "Private residence"],
-      ["Structure", "Steel frame with timber roof cassettes"], ["Materials", "Fibre-cement panels, oak, glass, exposed concrete"],
-      ["Software", "Rhino, Grasshopper, Revit, Enscape"], ["Techniques", "Parametric form finding, panel rationalisation, solar analysis"],
-      ["Status", "Design development"],
+      ["Site area", "4,500 m²", 1], ["Built-up area", "1,850 m²", 1], ["Building type", "Luxury Boutique Resort"],
+      ["Structure", "RC & Kathkuni timber-stone hybrid frame"], ["Materials", "Local stone masonry, cedar timber, slate tile, insulated glass"],
+      ["Software", "SketchUp, Revit, Lumion, V-Ray"], ["Techniques", "Contour-responsive terracing, passive thermal mass, solar orientation"],
+      ["Status", "Hitanshu Jishtu Architects"],
     ],
     highlights: [
-      ["A single folded roof", "One surface covers living, sleeping and terrace spaces."],
-      ["Shading by depth", "Deep reveals keep the west glass in shadow through the afternoon."],
-      ["38 panel types", "A complex form built from a small kit of flat parts."],
-      ["Daylight by design", "Every room receives light from two sides."],
+      ["Terraced platforms", "Buildings follow natural slopes without massive excavation."],
+      ["Uninterrupted views", "Floor-to-ceiling glass looks out to the Beas river and mountain ridge."],
+      ["Local materials", "Durable mountain timber and quarried stone that age gracefully."],
+      ["Climate responsive", "Glazed south facades capture winter daylight; heavy masonry retains warmth."],
     ],
-    finImg: [IMG.villa, "40% 50%", 1.05],
-    fin: "A roof that bends to its landscape, and a house that opens only where the view deserves it.",
+    finImg: [IMG.bearBourne.sections, "50% 70%", 1.05],
+    fin: "Architecture that grows from its mountain hillside, offering warmth and shelter against the wild Himalayan peaks.",
+  },
+  "parametric-project-01": {
+    hero: "bleed", heroImg: IMG.luminaHills.hero, heroPos: "50% 55%",
+    location: "Shillong, Meghalaya, India", year: "2024", type: "Meghalaya Skill Incubation Hub",
+    intro: "An integrated educational campus where architecture becomes a catalyst for innovation, entrepreneurship and community engagement.",
+    overview: "Rather than imposing on the steep terrain, the development emerges from the landscape, creating a learning environment deeply rooted within Meghalaya's hills. Sweeping undulating roof geometries echo the surrounding ridges and respond dynamically to heavy rainfall.",
+    items: [
+      ["Design concept", "Contour-driven architecture that steps with the hillside, connecting learning spaces with landscape."],
+      ["Architectural vision", "An open, permeable campus celebrating Meghalaya's natural beauty and communal spirit."],
+      ["Objectives", "Harmonious terracing, passive rainwater harvesting, and light-filled collaborative incubation pods."],
+      ["Site context", "A dramatic hillside site in Shillong surrounded by pine forests, cloud mist, and natural ravines."],
+    ],
+    gallery: [
+      ["g-full", "21/9", IMG.luminaHills.hero, "50% 60%", 1, "Campus entrance and sweeping roof in the mist"],
+      ["g-l5", "4/5", IMG.luminaHills.plaza, "75% 65%", 1.15, "Ground plaza and transparent glass curtain walls"],
+      ["g-r7 g-down", "4/3", IMG.luminaHills.aerial, "75% 60%", 1.1, "Aerial view of hillside campus and amphitheatre"],
+      ["note", "Rather than imposing on the terrain, the development emerges from the landscape, deeply rooted within Meghalaya's hills."],
+      ["g-r5 g-up", "3/4", IMG.luminaHills.concepts, "70% 30%", 1.2, "Contour analysis and functional platform iterations"],
+    ],
+    devText: "The form was generated directly from contour curves and rainfall patterns, creating an aerodynamic and fluid structural envelope that shelters central courtyards and open amphitheatre spaces.",
+    dev: [
+      ["Contour reading", "Natural terraces identified and converted into stepped functional programmatic zones."],
+      ["Form finding", "Sweeping double-curved shell roof modeled parametrically to channel monsoonal rainfall."],
+      ["BIM & Technical", "Structural grid coordinated with Revit for curved slab edges, facade panels and services."],
+    ],
+    devImg: [IMG.luminaHills.concepts, "30% 60%", 1.1],
+    spec: [
+      ["Site area", "12,800 m²", 1], ["Built-up area", "6,200 m²", 1], ["Building type", "Educational & Incubation Campus"],
+      ["Structure", "Post-tensioned concrete slabs with sculpted steel roof canopy"], ["Materials", "Exposed concrete, structural glass, zinc cladding, local stone"],
+      ["Software", "Rhino, Grasshopper, Revit, Enscape, D5 Render"], ["Techniques", "Parametric roof generation, solar shadow analysis, rainwater channeling"],
+      ["Status", "Hitanshu Jishtu Architects"],
+    ],
+    highlights: [
+      ["Undulating shell canopy", "One fluid roof structure connects incubation, learning, and gathering pods."],
+      ["Central amphitheatre", "Carved into the natural contour bowl, hosting campus gatherings and public forums."],
+      ["Permeable facades", "Double-height glazing connects indoor workshops to lush exterior pine forests."],
+      ["Rainwater integration", "Sculpted roof forms guide seasonal monsoons into retention ponds."],
+    ],
+    finImg: [IMG.luminaHills.plaza, "50% 60%", 1.05],
+    fin: "A campus where architecture rises softly from the mountainside, empowering community and innovation.",
   },
   "bim-project-01": {
-    hero: "split", heroImg: IMG.facade, heroPos: "45% 40%",
-    location: "Kochi, India", year: "2023", type: "Gallery & workshop",
-    intro: "A cultural building documented end to end in BIM, from early massing to a fully coordinated construction set.",
-    overview: "Heavy, textured volumes are cut by deep window reveals around a courtyard of retained trees. Behind the calm surfaces sits one federated model shared by architecture, structure and services, from which every drawing and schedule was produced.",
+    hero: "split", heroImg: IMG.awaken.hero, heroPos: "50% 50%",
+    location: "Kerala, India", year: "2023", type: "Revival Centre for Lost Art Forms",
+    intro: "A dedicated cultural hub preserving and revitalizing Kerala's traditional performing arts, craftsmanship and regional heritage.",
+    overview: "Inspired by Theyyam and Kathakali, the design integrates exhibition galleries, craft workshops, and communal courtyards through a continuous circulation spine, connecting built spaces with landscape, water, and traditional artisanal workshops.",
     items: [
-      ["Design concept", "Solid textured masses opened by a few deep, precise reveals."],
-      ["Architectural vision", "Make the technical work invisible, so the material and light can speak."],
-      ["Objectives", "No clashes at tender, one shared model, and a drawing set generated from it."],
-      ["Site context", "A dense urban plot whose mature street trees were kept and mapped into the model."],
+      ["Design concept", "Layered modular volumes transitioning from entrance promenade to water court."],
+      ["Architectural vision", "A living platform for cultural expression, learning, and generational knowledge sharing."],
+      ["Objectives", "Seamless indoor-outdoor permeability, natural ventilation, and daylighting for craft studios."],
+      ["Site context", "A lush tropical site in Kerala bordered by water bodies, coconut palms, and traditional trails."],
     ],
     gallery: [
-      ["g-l8", "16/10", IMG.facade, "50% 40%", 1, "Street facade"],
-      ["g-r4 g-down", "3/4", IMG.facade, "45% 25%", 1.8, "Window reveal"],
-      ["g-l4", "1/1", IMG.facade, "20% 30%", 2, "Masonry texture"],
-      ["g-r6 g-down", "4/3", IMG.facade, "70% 75%", 1.6, "Trees against the facade"],
-      ["g-full", "21/9", IMG.facade, "50% 60%", 1.1, "Courtyard elevation"],
+      ["g-l8", "16/10", IMG.awaken.hero, "50% 50%", 1, "Main facade, courtyard bridge, and artisan studios"],
+      ["g-r4 g-down", "3/4", IMG.awaken.colonnade, "75% 60%", 1.1, "Colonnade corridor with traditional Kathakali and Theyyam performers"],
+      ["g-l4", "1/1", IMG.awaken.axonometric, "75% 35%", 1.25, "3D axonometric model and massing articulation"],
+      ["g-r6 g-down", "4/3", IMG.awaken.plans, "20% 50%", 1.1, "Ground and first floor technical drawing documentation"],
+      ["g-full", "21/9", IMG.awaken.masterplan, "50% 50%", 1.05, "Masterplan and site integration"],
     ],
-    devText: "Design and documentation ran as one process. Each decision was made in the model and tested against structure and services before it reached a drawing.",
+    devText: "Every workshop—weaving, coir, screw pine, and pottery—was systematically modeled in BIM with exact spatial requirements, service integrations, and natural daylight criteria.",
     dev: [
-      ["Massing (LOD 200)", "Volumes and openings set against daylight, programme and the retained trees."],
-      ["Coordination", "Architecture, structure and MEP federated, with weekly clash detection."],
-      ["Documentation", "Plans, sections, details and schedules generated directly from the model."],
+      ["Cultural research", "Traditional spatial typologies mapped into modular, interactive studio volumes."],
+      ["Coordinated documentation", "Comprehensive architectural plans, sections, and structural grid modeling."],
+      ["BIM detail schedules", "Door, window, louvre, and joinery schedules extracted directly from the federated model."],
     ],
-    devImg: [IMG.facade, "35% 35%", 1.5],
+    devImg: [IMG.awaken.masterplan, "20% 40%", 1.2],
     spec: [
-      ["Site area", "3,200 m²", 1], ["Built-up area", "2,650 m²", 1], ["Building type", "Gallery & workshop"],
-      ["Structure", "RC frame with load-bearing textured masonry"], ["Materials", "Lime-rendered masonry, precast concrete reveals, bronze frames"],
-      ["Software", "Revit, Navisworks, Dynamo, AutoCAD"], ["Techniques", "LOD 350 modelling, clash detection, model-based scheduling"],
-      ["Deliverable", "Coordinated construction set"],
+      ["Site area", "8,400 m²", 1], ["Built-up area", "3,100 m²", 1], ["Building type", "Cultural Revival Centre"],
+      ["Structure", "Exposed reinforced concrete frame with timber rafters and louvered screens"], ["Materials", "Cast-in-place concrete, teak timber, terracotta, local laterite"],
+      ["Software", "Revit, AutoCAD, Lumion, Photoshop, InDesign"], ["Techniques", "LOD 350 BIM documentation, coordinated sections, solar analysis"],
+      ["Deliverable", "Complete architectural drawing set & masterplan"],
     ],
     highlights: [
-      ["One federated model", "Every discipline worked in the same coordinated model."],
-      ["Precast reveals at 1:5", "Each window reveal detailed and scheduled from the model."],
-      ["Automated schedules", "Doors, windows and finishes updated live from BIM data."],
-      ["Trees in the model", "Retained trees surveyed and protected through design."],
+      ["Central circulation spine", "Smooth journey connecting exhibition, workshops, library and amphitheatre."],
+      ["Artisan workshops", "Dedicated spaces for weaving, pottery, and traditional crafts with natural lighting."],
+      ["Courtyard microclimate", "Open courtyards and water elements promote passive cross-ventilation."],
+      ["Authentic materiality", "Exposed concrete paired with warm timber screens reflecting Kerala traditions."],
     ],
-    finImg: [IMG.facade, "55% 50%", 1.05],
-    fin: "Precision that never shows, so the building can feel effortless.",
-  },
-  "architecture-project-01": {
-    hero: "layered", heroImg: IMG.cabin, heroCut: IMG.cabinCut,
-    location: "Himachal Pradesh, India", year: "2022", type: "Mountain retreat",
-    intro: "A mountain refuge of dark timber volumes set on bare rock, open to the weather and the long view.",
-    overview: "Simple volumes are turned slightly apart on the rock, each framing its own view. Point foundations leave the ground almost untouched, while the dark metal skin and warm timber interior make the refuge legible from the trail at dusk.",
-    items: [
-      ["Design concept", "Simple volumes, turned apart, each with one large view."],
-      ["Architectural vision", "Shelter that sits lightly on the ground and stands strong against the wind."],
-      ["Objectives", "Minimal excavation, materials that weather well, a warm interior that glows at dusk."],
-      ["Site context", "An exposed rocky plateau with heavy snow, strong winds and a wide valley view."],
-    ],
-    gallery: [
-      ["g-full", "21/9", IMG.cabin, "50% 55%", 1, "The refuge on the rock"],
-      ["note", "The volumes step with the rock rather than flattening it, so the ground stays as it was found."],
-      ["g-r5", "4/5", IMG.cabin, "62% 40%", 1.9, "Picture window"],
-      ["g-l6 g-up", "4/3", IMG.cabin, "30% 90%", 1.7, "Rock and lichen"],
-      ["g-r6 g-down", "16/10", IMG.cabin, "85% 45%", 1.8, "Standing-seam skin"],
-    ],
-    devText: "The project began on the rock itself: mapping the outcrops, the wind and the sun, then placing each volume where the ground and the view allowed.",
-    dev: [
-      ["Site study", "Rock outcrops, wind direction and winter sun mapped before any form."],
-      ["Volumes", "Three simple forms rotated to catch views and shelter the entrance."],
-      ["Detailing", "Prefabricated timber panels on point foundations, clad in dark metal."],
-    ],
-    devImg: [IMG.cabin, "45% 50%", 1.6],
-    spec: [
-      ["Site area", "900 m²", 1], ["Built-up area", "160 m²", 1], ["Building type", "Mountain retreat"],
-      ["Structure", "Timber frame on point foundations"], ["Materials", "Standing-seam metal, larch, triple glazing, local stone"],
-      ["Software", "SketchUp, Revit, Lumion"], ["Techniques", "Prefabricated panels, passive solar orientation"],
-      ["Build time", "6 weeks on site"],
-    ],
-    highlights: [
-      ["Point foundations", "The rock stays intact beneath the building."],
-      ["Framed views", "Each volume has one large window onto the valley."],
-      ["Prefabricated panels", "Assembled on site in six weeks between snowfalls."],
-      ["Dark skin, warm core", "Metal absorbs winter sun; timber warms the interior."],
-    ],
-    finImg: [IMG.cabin, "50% 70%", 1.05],
-    fin: "Small rooms on the rock, and the whole mountain as the view.",
+    finImg: [IMG.awaken.colonnade, "75% 50%", 1.05],
+    fin: "Architecture that honors living heritage, turning memory into vibrant everyday space.",
   },
 };
 
-/** [title, text, image, object-position] — draft copy, edit freely */
+/** [title, text, image, object-position] */
 export const THEMES: [string, string, string, string][] = [
-  ["Design thinking", "Every project starts with questions: about the site, the people and the brief, before any form appears.", IMG.cabin, "30% 60%"],
-  ["Spatial experience", "Architecture is felt by moving through it. Light, sequence and proportion shape how a space is lived.", IMG.villa, "70% 60%"],
-  ["Sustainable architecture", "Working with climate, orientation and context, so buildings ask less of the places they stand in.", IMG.cabin, "80% 90%"],
-  ["Material exploration", "Materials carry meaning. Their texture, weight and ageing are part of the design, not a finish applied after it.", IMG.facade, "40% 30%"],
-  ["Innovation through technology", "Parametric and BIM tools turn complex ideas into geometry that can be tested, coordinated and built.", IMG.villa, "30% 40%"],
-  ["Human-centred spaces", "In the end, architecture is for people: spaces that are clear, comfortable and generous to use.", IMG.facade, "75% 70%"],
+  ["Design thinking", "Every project starts with questions: about the site, the people and the brief, before any form appears.", IMG.ronSketches, "50% 50%"],
+  ["Spatial experience", "Architecture is felt by moving through it. Light, sequence and proportion shape how a space is lived.", IMG.baah.interior, "50% 50%"],
+  ["Sustainable architecture", "Working with climate, orientation and context, so buildings ask less of the places they stand in.", IMG.verdureValley.hero, "50% 50%"],
+  ["Material exploration", "Materials carry meaning. Their texture, weight and ageing are part of the design, not a finish applied after it.", IMG.bearBourne.waterfall, "50% 50%"],
+  ["Innovation through technology", "Parametric and BIM tools turn complex ideas into geometry that can be tested, coordinated and built.", IMG.luminaHills.hero, "50% 50%"],
+  ["Human-centred spaces", "In the end, architecture is for people: spaces that are clear, comfortable and generous to use.", IMG.housing.plaza, "50% 50%"],
 ];
 
 /** [title, description, tags, image, object-position] */
 export const EXPERTISE: [string, string, string[], string, string][] = [
-  ["Parametric Architecture", "Exploring complex geometries, computational workflows and innovative architectural forms.", ["Form finding", "Parametric facades", "Geometry rationalisation", "Design iteration"], IMG.villa, "60% 50%"],
-  ["BIM & Technical Design", "Transforming architectural concepts into detailed digital models, coordinated drawings and technical documentation.", ["Revit modelling", "Coordinated drawings", "Technical documentation", "Detailing"], IMG.facade, "40% 40%"],
-  ["Architectural Design", "Developing meaningful architectural spaces through research, conceptual thinking, spatial planning and visual exploration.", ["Concept design", "Spatial planning", "Site response", "Visual storytelling"], IMG.cabin, "50% 80%"],
-  ["Computational Design", "Using algorithms and data to test options, analyse performance and inform design decisions.", ["Algorithmic design", "Design analysis", "Optimisation", "Workflow automation"], IMG.villa, "20% 60%"],
+  ["Parametric Architecture", "Exploring complex geometries, computational workflows and innovative architectural forms.", ["Form finding", "Parametric facades", "Geometry rationalisation", "Design iteration"], IMG.luminaHills.hero, "50% 50%"],
+  ["BIM & Technical Design", "Transforming architectural concepts into detailed digital models, coordinated drawings and technical documentation.", ["Revit modelling", "Coordinated drawings", "Technical documentation", "Detailing"], IMG.awaken.plans, "50% 50%"],
+  ["Architectural Design", "Developing meaningful architectural spaces through research, conceptual thinking, spatial planning and visual exploration.", ["Concept design", "Spatial planning", "Site response", "Visual storytelling"], IMG.verdureValley.hero, "50% 50%"],
+  ["Computational Design", "Using algorithms and data to test options, analyse performance and inform design decisions.", ["Algorithmic design", "Design analysis", "Optimisation", "Workflow automation"], IMG.enliven.shells, "50% 50%"],
 ];
 
-export const BEHIND = ["Hand-drawn sketch", "Floor plan", "Elevation", "Section", "Technical drawing", "3D model", "Material study", "Construction detail", "Final render"];
+export const BEHIND_ITEMS: { title: string; img: string }[] = [
+  { title: "Hand-drawn sketch", img: "/images/behind-01-sketch.jpg" },
+  { title: "Floor plan", img: "/images/behind-02-floorplan.jpg" },
+  { title: "Elevation", img: "/images/behind-03-elevation.jpg" },
+  { title: "Section", img: "/images/behind-04-section.jpg" },
+  { title: "Technical drawing", img: "/images/behind-05-technical.jpg" },
+  { title: "3D model", img: "/images/behind-06-3dmodel.jpg" },
+  { title: "Material study", img: "/images/behind-07-material.jpg" },
+  { title: "Construction detail", img: "/images/behind-08-detail.jpg" },
+  { title: "Final render", img: "/images/behind-09-render.jpg" },
+];
+
+export const BEHIND = BEHIND_ITEMS.map((b) => b.title);
 
 export const NAV = [
   { id: "projects", label: "Projects" },

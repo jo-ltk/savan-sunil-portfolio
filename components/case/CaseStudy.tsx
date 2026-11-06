@@ -18,7 +18,6 @@ function Ph({ src, pos = "50% 50%", zoom = 1, ratio, cap, eager }: { src: string
         />
       </div>
       {cap ? <figcaption>{cap}</figcaption> : null}
-      <span className="credit">Temporary reference image</span>
     </figure>
   );
 }
@@ -63,7 +62,6 @@ export default function CaseStudy({ index }: { index: number }) {
         <div data-theme="dark" style={{ position: "absolute", inset: 0, zIndex: 5, pointerEvents: "none" }}>
           <div className="cs-hero-text" style={{ pointerEvents: "auto" }}>{textInner}</div>
         </div>
-        <span className="credit">Temporary reference image</span>
       </header>
     );
   } else if (c.hero === "split") {
@@ -98,7 +96,6 @@ export default function CaseStudy({ index }: { index: number }) {
                 <div className="cs-rv" key={it[0]}><h3>{it[0]}</h3><p className="txt">{it[1]}</p></div>
               ))}
             </div>
-            <p className="eyebrow sample" style={{ marginTop: 48 }}>Sample case-study content — replace with project details</p>
           </div>
         </section>
 
