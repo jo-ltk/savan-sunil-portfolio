@@ -4,6 +4,7 @@ import Archive from "@/components/landing/Archive";
 import Philosophy from "@/components/landing/Philosophy";
 import Expertise from "@/components/landing/Expertise";
 import Process from "@/components/landing/Process";
+import Build from "@/components/landing/Build";
 import Behind from "@/components/landing/Behind";
 import About from "@/components/landing/About";
 import Resume from "@/components/landing/Resume";
@@ -20,6 +21,7 @@ export default function Home() {
       <Philosophy />
       <Expertise />
       <Process />
+      <Build />
       <Behind />
       <About />
       <Resume />

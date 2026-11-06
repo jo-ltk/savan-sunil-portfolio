@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger, isCovered, refreshNow, scrollToId, scrollTop, setCurrentNav, setTone, wipeOut } from "@/lib/motion";
 
 const pad = (n: number) => (n < 10 ? "0" + n : "" + n);
+const STEPS = 5; // interlude stages: site & grid, structure, floors, envelope, light & life
 const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => r.querySelector(s) as T;
 const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => Array.from(r.querySelectorAll(s)) as T[];
 
@@ -46,7 +47,7 @@ export default function LandingMotion() {
 
     const mm = gsap.matchMedia();
     mm.add(
-      { motion: "(prefers-reduced-motion: no-preference)", reduced: "(prefers-reduced-motion: reduce)", wide: "(min-width: 1101px)", fine: "(hover: hover) and (pointer: fine)" },
+      { motion: "(prefers-reduced-motion: no-preference)", reduced: "(prefers-reduced-motion: reduce)", wide: "(min-width: 1101px)", tall: "(min-height: 560px)", fine: "(hover: hover) and (pointer: fine)" },
       (ctx) => {
         const c = ctx.conditions as Record<string, boolean>;
         const local: (() => void)[] = [];
@@ -59,6 +60,52 @@ export default function LandingMotion() {
         }
         body.classList.add("tone-js");
         if (!c.wide) body.classList.add("no-pin");
+
+        /* 06½ interlude: the building constructs itself, stage by stage, scrubbed to the scroll.
+           Set up first: going live changes the section's layout, and later triggers measure below it. */
+        {
+          const bd = $("#build"), pct = $("#bdPct"), steps = $$(".bd-steps li", bd);
+          const stage = (i: number) => $$(`.bd-live [data-stage="${i}"] path`, bd);
+          const texts = (i: number) => $$(`.bd-live [data-stage="${i}"] text`, bd);
+          const crane = $("#bdCrane"), wins = $$(".bd-win", bd);
+          const all = $$(".bd-live path, .bd-live text, .bd-win", bd);
+          bd.classList.add("is-live");
+          const paths = $$(".bd-live path", bd);
+          gsap.set(paths, { attr: { "stroke-dasharray": 1, "stroke-dashoffset": 1 } });
+          gsap.set($$(".bd-live text", bd), { opacity: 0 });
+          gsap.set(wins, { opacity: 0 });
+          gsap.set(crane, { opacity: 1 });
+          const setStep = (p: number) => {
+            const s = Math.min(STEPS - 1, Math.floor(p * (STEPS + 0.5)));
+            steps.forEach((li, k) => { li.classList.toggle("on", k <= s); li.classList.toggle("now", k === s); });
+            pct.textContent = String(Math.min(100, Math.round((p * (STEPS + 0.5) / STEPS) * 100)));
+          };
+          setStep(0);
+          const tl = gsap.timeline({
+            defaults: { ease: "none" },
+            // wide: a full-screen room pinned at the top; narrower: content-sized and pinned centred on screen
+            scrollTrigger: {
+              trigger: bd, start: c.wide ? "top top" : "center center", end: () => "+=" + innerHeight * (c.wide ? 2.4 : 1.6),
+              pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true, refreshPriority: -1,
+              onUpdate: (s) => setStep(s.progress),
+            },
+          });
+          for (let i = 0; i < STEPS; i++) {
+            const ps = stage(i);
+            tl.to(ps, { attr: { "stroke-dashoffset": 0 }, duration: 0.6, stagger: 0.4 / Math.max(1, ps.length - 1) }, i);
+            if (texts(i).length) tl.to(texts(i), { opacity: 1, duration: 0.25 }, i + 0.55);
+          }
+          tl.to(wins, { opacity: 0.85, duration: 0.25, stagger: { each: 0.05, from: "random" } }, STEPS - 1 + 0.15)
+            .to(crane, { opacity: 0, duration: 0.4 }, STEPS - 1 + 0.4)
+            .to({}, { duration: 0.5 }, STEPS); // hold the finished building before the section scrolls away
+          local.push(() => {
+            bd.classList.remove("is-live");
+            gsap.set([...all, crane], { clearProps: "all" });
+            paths.forEach((p) => { p.removeAttribute("stroke-dasharray"); p.removeAttribute("stroke-dashoffset"); });
+            steps.forEach((li) => { li.classList.add("on"); li.classList.remove("now"); });
+            pct.textContent = "100";
+          });
+        }
 
         /* 01 hero: image and name entrance, then subtle depth on scroll */
         gsap.timeline({ defaults: { ease: "expo.out" } })
@@ -102,8 +149,9 @@ export default function LandingMotion() {
           });
         }
 
-        /* 03 archive: pinned horizontal gallery on wide screens */
-        if (c.wide) {
+        /* 03 archive: pinned horizontal gallery, scrolling down moves it right. Phones too when there is
+           height for it; short landscape phones keep the native swipe rail. */
+        if (c.wide || c.tall) {
           const sec = $("#archive"), tr = $("#arTrack");
           sec.classList.add("is-pinned");
           local.push(() => sec.classList.remove("is-pinned"));
@@ -114,7 +162,8 @@ export default function LandingMotion() {
           };
           gsap.timeline({
             scrollTrigger: {
-              trigger: sec, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1,
+              // wide: a full-screen room; narrower: the section keeps its own height and pins centred on screen
+              trigger: sec, start: c.wide ? "top top" : "center center", end: () => "+=" + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1,
               onUpdate: (s) => setArchive(s.progress),
             },
           })

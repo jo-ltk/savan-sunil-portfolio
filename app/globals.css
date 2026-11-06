@@ -113,6 +113,22 @@ a { color: inherit; }
 .cursor span { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #111; opacity: 0; }
 .cursor.big { background: #f5f4f0; mix-blend-mode: normal; }
 .has-cursor .cursor { display: flex; }
+
+/* tap / click: a drafting snap mark (see TapMark) */
+.tap { --tap-ink: #111111; position: fixed; z-index: 95; width: 0; height: 0; pointer-events: none; }
+.tap.tap-dark { --tap-ink: #f5f4f0; }
+.tap i { position: absolute; left: 0; top: 0; display: block; }
+.tap-h, .tap-v { background: var(--tap-ink); opacity: 0; }
+.tap-h { width: 160px; height: 1px; margin: 0 0 0 -80px; animation: tap-h 1s var(--ease) forwards; }
+.tap-v { width: 1px; height: 160px; margin: -80px 0 0 0; animation: tap-v 1s var(--ease) forwards; }
+.tap-ring { width: 64px; height: 64px; margin: -32px 0 0 -32px; border: 1px solid var(--tap-ink); border-radius: 50%; animation: tap-ring .9s var(--ease) forwards; }
+.tap-snap { width: 11px; height: 11px; margin: -6px 0 0 -6px; border: 1.5px solid var(--accent); box-sizing: border-box; animation: tap-snap 1s var(--ease) forwards; }
+.tap-xy { position: absolute; left: 12px; top: 10px; white-space: nowrap; font-size: 9px; font-weight: 600; letter-spacing: .14em; font-variant-numeric: tabular-nums; color: var(--tap-ink); opacity: 0; animation: tap-xy 1s ease forwards; }
+@keyframes tap-h { 0% { transform: scaleX(0); opacity: .55; } 45% { transform: scaleX(1); opacity: .4; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes tap-v { 0% { transform: scaleY(0); opacity: .55; } 45% { transform: scaleY(1); opacity: .4; } 100% { transform: scaleY(1); opacity: 0; } }
+@keyframes tap-ring { 0% { transform: scale(.1); opacity: .9; } 100% { transform: scale(1); opacity: 0; } }
+@keyframes tap-snap { 0% { transform: rotate(0) scale(.3); opacity: 0; } 25% { transform: rotate(45deg) scale(1.15); opacity: 1; } 40% { transform: rotate(45deg) scale(1); } 75% { opacity: 1; } 100% { transform: rotate(45deg) scale(1); opacity: 0; } }
+@keyframes tap-xy { 0%, 15% { opacity: 0; transform: translateX(-4px); } 30% { opacity: .8; transform: none; } 70% { opacity: .8; } 100% { opacity: 0; } }
 .wipe { position: fixed; inset: 0; z-index: 80; background: #111; transform: translateY(100%); pointer-events: none; }
 
 /* ---------- 01 hero: villa image and name ---------- */
@@ -224,6 +240,14 @@ a { color: inherit; }
   .ar-card { width: 86vw; min-width: 0; }
   .ar-cap { grid-template-columns: 32px minmax(0, 1fr); }
   .ar-type, .ar-place { grid-column: 2; grid-row: auto; text-align: left; }
+  .is-pinned .ar-pin { gap: 32px; }
+  .is-pinned .ar-card { width: 82vw; }
+}
+/* narrower pinned gallery: sized to its content (no full-screen stretch), pinned when centred */
+@media (max-width: 1100px) {
+  .archive.is-pinned { padding: var(--sec-y) 0; }
+  .is-pinned .ar-pin { height: auto; padding: 0; grid-template-rows: none; }
+  .is-pinned .ar-rail { align-self: auto; }
 }
 
 /* ---------- 04 philosophy ---------- */
@@ -301,6 +325,42 @@ a { color: inherit; }
   .pr-step:last-child { padding-bottom: 0; }
   .pr-text, .pr-pic { grid-column: 1; position: static; }
   .pr-big { font-size: 72px; }
+}
+
+/* ---------- 06½ interlude: a building constructs itself as you scroll ----------
+   Static (no JS / reduced motion): the finished drawing in a normal section.
+   Live: the section is ~3 screens tall and the stage sticks while the drawing is scrubbed. */
+.build { position: relative; padding: var(--sec-y) 0; color: var(--ink); background: var(--surface); }
+.bd-stage { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); column-gap: var(--space-7); align-items: center; padding: 0 var(--g); box-sizing: border-box; }
+/* live on wide screens: a full-screen room pinned at the top (pinned by LandingMotion) */
+.build.is-live { padding: 0; }
+.build.is-live .bd-stage { height: var(--sh); padding: 96px var(--g) 48px; }
+.bd-copy { display: grid; gap: var(--space-5); align-content: center; }
+.bd-copy .h2 { font-size: clamp(38px, 4.6vw, 72px); }
+.bd-steps { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.bd-steps li { display: flex; align-items: baseline; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--ink-faint); font-size: 15px; color: var(--ink-muted); transition: color .4s; }
+.bd-steps li span { font-size: 11px; font-weight: 600; letter-spacing: .1em; font-variant-numeric: tabular-nums; }
+.bd-steps li.on { color: var(--ink); }
+.bd-steps li.on span { color: var(--accent); }
+.bd-meter { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); }
+.bd-meter b { display: inline-block; margin-right: 6px; font-size: clamp(28px, 2.6vw, 40px); letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bd-draw { display: block; width: 100%; height: auto; max-height: calc(var(--sh) - 160px); overflow: visible; }
+.bd-draw path { stroke: var(--ink); stroke-width: 1.3; }
+.bd-draw path.a { stroke: var(--accent); }
+.bd-draw text { fill: var(--ink-muted); font-size: 10px; font-weight: 600; letter-spacing: .08em; }
+.bd-draw .bd-win { fill: var(--accent); opacity: .85; }
+#bdCrane { opacity: 0; }
+/* live on phones and tablets: sized to its content and pinned centred on screen, so no blank bands */
+@media (max-width: 1100px) {
+  .build.is-live { padding: 56px 0; }
+  .build.is-live .bd-stage { height: auto; padding: 0 var(--g); }
+}
+@media (max-width: 760px) {
+  .bd-stage { grid-template-columns: 1fr; row-gap: var(--space-5); }
+  .bd-copy { gap: var(--space-3); }
+  .build.is-live .bd-steps li:not(.now) { display: none; }
+  .bd-steps li { border-bottom: 0; padding: 0; }
+  .bd-draw { max-height: none; }
 }
 
 /* ---------- 07 behind the design: drawings at native proportions ---------- */

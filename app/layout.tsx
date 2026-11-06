@@ -5,6 +5,7 @@ import "@fontsource/work-sans/600.css";
 import "@fontsource/work-sans/700.css";
 import "./globals.css";
 import SiteChrome from "@/components/SiteChrome";
+import TapMark from "@/components/TapMark";
 
 export const metadata: Metadata = {
   title: "Savan Sunil Portfolio",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en">
       <body>
         <SiteChrome />
+        <TapMark />
         <div id="content">{children}</div>
       </body>
     </html>
